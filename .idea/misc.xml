@@ -4,7 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/drawable/ic_svg.xml" value="0.103" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/layout/activity_language.xml" value="0.16" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/drawable/spinner_border.xml" value="0.153" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/layout/activity_language.xml" value="0.10732984293193717" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/layout/spinner_item.xml" value="0.33" />

@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">U Tourist</string>
+    <string name="hello_world" >Sálem dúnya!</string>
+    <string name="tildi_sayla">Tildi saylań</string>
 </resources>
