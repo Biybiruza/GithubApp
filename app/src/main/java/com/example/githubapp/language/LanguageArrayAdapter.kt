@@ -1,10 +1,11 @@
-package com.example.githubapp
+package com.example.githubapp.language
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import com.example.githubapp.R
 import com.example.githubapp.databinding.SpinnerItemBinding
 
 class LanguageArrayAdapter(context: Context, countrylist: ArrayList<LanguageCountry>?): ArrayAdapter<LanguageCountry>(context, 0,

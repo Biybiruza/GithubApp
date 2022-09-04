@@ -3,10 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/drawable/etid_text_border.xml" value="0.2105" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/drawable/ic_google_icon.xml" value="0.2105" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/drawable/ic_svg.xml" value="0.103" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/drawable/spinner_border.xml" value="0.2105" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/font/relasio_regular.xml" value="0.234375" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/layout-v26/activity_welcome.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/layout/activity_language.xml" value="0.16" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/layout/activity_sign_in.xml" value="0.5" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/layout/activity_welcome.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GithubApp/app/src/main/res/layout/spinner_item.xml" value="0.33" />
       </map>
     </option>

@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubApp">
         <activity
+            android:name=".signup.WelcomeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
+        <activity
+            android:name=".signup.SignUpActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
+        <activity
+            android:name=".signup.SignInActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
@@ -23,10 +35,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LanguageActivity"
+            android:name=".language.LanguageActivity"
             android:exported="true"
-            android:theme="@style/Theme.Design.Light.NoActionBar"/>
-
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
     </application>
 
 </manifest>

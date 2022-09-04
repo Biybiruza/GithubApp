@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">U Tourist</string>
     <string name="tildi_sayla">Tildi saylań</string>
+    <string name="started_title">Xosh kelipsiz!</string>
+    <string name="started_discrabtion">Biz menen Qaraqalpaqstan Respublikasina sayahatıńız kewilli ótsin</string>
+    <string name="regisretoin">Sign up</string>
+    <string name="sign_in">Sign In</string>
 </resources>

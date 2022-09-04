@@ -1,4 +1,4 @@
-package com.example.githubapp
+package com.example.githubapp.language
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.example.githubapp.MainActivity
 import com.example.githubapp.databinding.ActivityLanguageBinding
+import com.example.githubapp.signup.WelcomeActivity
 
 class LanguageActivity : AppCompatActivity() {
 
@@ -18,7 +20,6 @@ class LanguageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLanguageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
 //        binding.btnNext.setOnClickListener{
 //            val intent = Intent(this,MainActivity::class.java)
@@ -41,6 +42,9 @@ class LanguageActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
+                when(position){
+                    1 -> {}
+                }
 //                languageCountry = LanguageCountry(position,Countries.countries[position])
                 if (Countries.countries[position] != "All Language")
                     intentSelect()
@@ -81,7 +85,7 @@ class LanguageActivity : AppCompatActivity() {
     }
 
     fun intentSelect(){
-        val intent = Intent(this,MainActivity::class.java)
+        val intent = Intent(this, WelcomeActivity::class.java)
         startActivity(intent)
         finish()
     }

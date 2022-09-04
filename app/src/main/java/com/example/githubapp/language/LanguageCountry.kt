@@ -1,4 +1,6 @@
-package com.example.githubapp
+package com.example.githubapp.language
+
+import com.example.githubapp.R
 
 data class LanguageCountry (val image: Int, val name: String)
 

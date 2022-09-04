@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="tildi_sayla">Tildi saylań</string>
+    <string name="started_title">Xosh kelipsiz!</string>
+    <string name="started_discrabtion">Sayahatińiz biz menen kewilli ótsin</string>
+    <string name="regisretoin">regisretoin_btn_text</string>
+    <string name="sign_in">Sign In</string>
 </resources>
