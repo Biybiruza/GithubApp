@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface ApiService {
 
-    @GET("users/username")
-    fun getUsersInfo(): Call<List<UsersInfo>>
+    @GET("users/Biybiruza")
+    fun getUsersInfo(): Call<UsersInfo>
 }
