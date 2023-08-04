@@ -11,8 +11,8 @@
     <!-- TODO: Update blank fragment layout -->
     <ImageView
         android:id="@+id/iv_photo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:src="@drawable/github"
         android:background="@drawable/shape_photo"/>
 

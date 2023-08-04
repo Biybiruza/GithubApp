@@ -23,11 +23,14 @@ class ViewFragment : Fragment(R.layout.fragment_view) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentViewBinding.bind(view)
-        val arg = arguments?.getString("username") ?: ""
 
         val apiService = ApiClient.getRetrofit().create(ApiService::class.java)
 
-        apiService.getUsersInfo()
+        val username = arguments?.getString("username") ?: "Biybiruza"
+
+        Toast.makeText(requireActivity(), username, Toast.LENGTH_LONG).show()
+
+        apiService.getUsersInfo(username)
             .enqueue(object : Callback<UsersInfo> {
                 override fun onResponse(
                     call: Call<UsersInfo>,
