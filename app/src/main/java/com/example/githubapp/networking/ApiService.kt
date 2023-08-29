@@ -8,6 +8,6 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("users/")
-    fun getUsersInfo(@Query("login") login: String): Call<UsersInfo>
+    @GET("users/{login}")
+    fun getUsersInfo(@Path("login") login: String): Call<UsersInfo>
 }

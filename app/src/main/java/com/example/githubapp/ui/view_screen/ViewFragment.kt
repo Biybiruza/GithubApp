@@ -26,9 +26,9 @@ class ViewFragment : Fragment(R.layout.fragment_view) {
 
         val apiService = ApiClient.getRetrofit().create(ApiService::class.java)
 
-        val username = arguments?.getString("username") ?: "Biybiruza"
+        val username = arguments?.getString("username") ?: ""
 
-        Toast.makeText(requireActivity(), username, Toast.LENGTH_LONG).show()
+        Toast.makeText(requireActivity(), username+"", Toast.LENGTH_LONG).show()
 
         apiService.getUsersInfo(username)
             .enqueue(object : Callback<UsersInfo> {
@@ -36,11 +36,11 @@ class ViewFragment : Fragment(R.layout.fragment_view) {
                     call: Call<UsersInfo>,
                     response: Response<UsersInfo>
                 ) {
-                    if (response.isSuccessful){
+                    if (response.isSuccessful && response.body() != null){
                         Log.d(TAG, "onResponse: ${response.body()}")
                         loadData(response.body())
                     } else {
-                        Toast.makeText(requireActivity(), "error",Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireActivity(), "Response's code: "+response.code(),Toast.LENGTH_LONG).show()
                     }
                 }
 

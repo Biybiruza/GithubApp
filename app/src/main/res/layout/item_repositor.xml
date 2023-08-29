@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="12dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tv_nameProject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="Name project"
+            android:textColor="@color/purple_500"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_private"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/shape_stroke"
+            android:padding="2dp"
+            android:gravity="center"
+            android:text="Public"
+            android:textColor="@android:color/darker_gray"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/tv_nameProject"
+            app:layout_constraintTop_toTopOf="@id/tv_nameProject"
+            app:layout_constraintBottom_toBottomOf="@id/tv_nameProject"/>
+
+        <ImageView
+            android:id="@+id/iv_fillColor"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_fill_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_nameProject"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Java"
+            android:layout_marginStart="4dp"
+            app:layout_constraintStart_toEndOf="@id/iv_fillColor"
+            app:layout_constraintTop_toTopOf="@id/iv_fillColor"
+            app:layout_constraintBottom_toBottomOf="@id/iv_fillColor"/>
+
+        <TextView
+            android:id="@+id/tv_starCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:gravity="center"
+            android:paddingStart="2dp"
+            android:drawableStart="@drawable/ic_star"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/tv_language"
+            app:layout_constraintTop_toTopOf="@id/tv_language"
+            app:layout_constraintBottom_toBottomOf="@id/tv_language"/>
+
+        <TextView
+            android:id="@+id/tv_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Updated 2 days ago"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toEndOf="@id/tv_starCount"
+            app:layout_constraintTop_toTopOf="@id/tv_starCount"
+            app:layout_constraintBottom_toBottomOf="@id/tv_starCount"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
