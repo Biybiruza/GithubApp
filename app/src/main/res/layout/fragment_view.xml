@@ -10,17 +10,16 @@
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="12dp"
-        app:cardCornerRadius="20dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/shape_photo">
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:elevation="8dp"
+        app:cardCornerRadius="50dp"
+        android:layout_marginTop="30dp">
 
         <ImageView
             android:id="@+id/iv_photo"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:src="@drawable/github"/>
 
     </androidx.cardview.widget.CardView>
@@ -130,6 +129,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_repository"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"

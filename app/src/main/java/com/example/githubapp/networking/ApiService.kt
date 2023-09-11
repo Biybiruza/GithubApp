@@ -1,5 +1,6 @@
 package com.example.githubapp.networking
 
+import com.example.githubapp.networking.data.ResponseData
 import com.example.githubapp.networking.data.UsersInfo
 import retrofit2.Call
 import retrofit2.http.GET
@@ -10,4 +11,9 @@ interface ApiService {
 
     @GET("users/{login}")
     fun getUsersInfo(@Path("login") login: String): Call<UsersInfo>
+
+    @GET("users/{login}/repos")
+    fun getRepositoryList(@Path("login") login: String): Call<List<ResponseData>>
+
+
 }

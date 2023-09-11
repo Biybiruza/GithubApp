@@ -38,25 +38,32 @@
             app:layout_constraintTop_toTopOf="@id/tv_nameProject"
             app:layout_constraintBottom_toBottomOf="@id/tv_nameProject"/>
 
-        <ImageView
-            android:id="@+id/iv_fillColor"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_fillColor"
             android:layout_width="16dp"
             android:layout_height="16dp"
+            app:cardCornerRadius="8dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/shape_fill_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_nameProject"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent">
 
+            <ImageView
+                android:id="@+id/iv_fillColor"
+                android:layout_width="16dp"
+                android:layout_height="16dp"/>
+
+        </androidx.cardview.widget.CardView>
         <TextView
             android:id="@+id/tv_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Java"
             android:layout_marginStart="4dp"
-            app:layout_constraintStart_toEndOf="@id/iv_fillColor"
-            app:layout_constraintTop_toTopOf="@id/iv_fillColor"
-            app:layout_constraintBottom_toBottomOf="@id/iv_fillColor"/>
+            app:layout_constraintStart_toEndOf="@id/cv_fillColor"
+            app:layout_constraintTop_toTopOf="@id/cv_fillColor"
+            app:layout_constraintBottom_toBottomOf="@id/cv_fillColor"/>
 
         <TextView
             android:id="@+id/tv_starCount"

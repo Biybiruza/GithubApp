@@ -5,12 +5,15 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.githubapp.R
 import com.example.githubapp.databinding.FragmentViewBinding
 import com.example.githubapp.networking.ApiClient
 import com.example.githubapp.networking.ApiService
+import com.example.githubapp.networking.data.ResponseData
 import com.example.githubapp.networking.data.UsersInfo
+import okhttp3.internal.assertThreadDoesntHoldLock
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,6 +22,7 @@ class ViewFragment : Fragment(R.layout.fragment_view) {
 
     private val TAG = "ViewFragment"
     private lateinit var binding: FragmentViewBinding
+    private var username = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,10 +30,39 @@ class ViewFragment : Fragment(R.layout.fragment_view) {
 
         val apiService = ApiClient.getRetrofit().create(ApiService::class.java)
 
-        val username = arguments?.getString("username") ?: ""
+        username = arguments?.getString("username") ?: ""
 
         Toast.makeText(requireActivity(), username+"", Toast.LENGTH_LONG).show()
 
+        getUser(apiService)
+        getRepository(apiService)
+
+    }
+
+    private fun getRepository(apiService: ApiService) {
+        apiService.getRepositoryList(username)
+            .enqueue(object: Callback<List<ResponseData>> {
+                override fun onResponse(
+                    call: Call<List<ResponseData>>,
+                    response: Response<List<ResponseData>>
+                ) {
+                    if(response.isSuccessful && response.body() != null) {
+                        val adapter = RepositoryAdapter()
+                        adapter.list = response.body()!!
+                        binding.rvRepository.layoutManager =
+                            LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL, false)
+                        binding.rvRepository.adapter = adapter
+                    }
+                }
+
+                override fun onFailure(call: Call<List<ResponseData>>, t: Throwable) {
+                    Toast.makeText(requireActivity(), "onFailure ",Toast.LENGTH_LONG).show()
+                }
+
+            })
+    }
+
+    private fun getUser(apiService: ApiService) {
         apiService.getUsersInfo(username)
             .enqueue(object : Callback<UsersInfo> {
                 override fun onResponse(
@@ -50,7 +83,6 @@ class ViewFragment : Fragment(R.layout.fragment_view) {
                 }
 
             })
-
     }
 
     private fun loadData(usersInfo: UsersInfo?) {
