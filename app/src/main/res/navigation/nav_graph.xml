@@ -18,5 +18,14 @@
         android:id="@+id/viewFragment"
         android:name="com.example.githubapp.ui.view_screen.ViewFragment"
         android:label="fragment_view"
-        tools:layout="@layout/fragment_view" />
+        tools:layout="@layout/fragment_view" >
+        <action
+            android:id="@+id/action_viewFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.example.githubapp.ui.view_screen.WebViewFragment"
+        android:label="fragment_web_view"
+        tools:layout="@layout/fragment_web_view" />
 </navigation>

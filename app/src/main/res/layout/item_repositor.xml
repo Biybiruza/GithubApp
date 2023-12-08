@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginVertical="8dp"
+    android:layout_marginHorizontal="16dp"
     android:elevation="12dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,6 +38,8 @@
             app:layout_constraintStart_toEndOf="@id/tv_nameProject"
             app:layout_constraintTop_toTopOf="@id/tv_nameProject"
             app:layout_constraintBottom_toBottomOf="@id/tv_nameProject"/>
+
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_fillColor"
@@ -73,7 +76,7 @@
             android:gravity="center"
             android:paddingStart="2dp"
             android:drawableStart="@drawable/ic_star"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="12dp"
             app:layout_constraintStart_toEndOf="@id/tv_language"
             app:layout_constraintTop_toTopOf="@id/tv_language"
             app:layout_constraintBottom_toBottomOf="@id/tv_language"/>
@@ -83,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Updated 2 days ago"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="12dp"
             app:layout_constraintStart_toEndOf="@id/tv_starCount"
             app:layout_constraintTop_toTopOf="@id/tv_starCount"
             app:layout_constraintBottom_toBottomOf="@id/tv_starCount"/>

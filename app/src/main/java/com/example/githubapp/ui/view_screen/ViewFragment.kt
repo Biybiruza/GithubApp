@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.githubapp.R
@@ -13,7 +14,6 @@ import com.example.githubapp.networking.ApiClient
 import com.example.githubapp.networking.ApiService
 import com.example.githubapp.networking.data.ResponseData
 import com.example.githubapp.networking.data.UsersInfo
-import okhttp3.internal.assertThreadDoesntHoldLock
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,6 +52,12 @@ class ViewFragment : Fragment(R.layout.fragment_view) {
                         binding.rvRepository.layoutManager =
                             LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL, false)
                         binding.rvRepository.adapter = adapter
+
+                        adapter.itemClickListener {
+                            val bundle = Bundle()
+                            bundle.putString("url", it)
+                            findNavController().navigate(R.id.action_viewFragment_to_webViewFragment, bundle)
+                        }
                     }
                 }
 
