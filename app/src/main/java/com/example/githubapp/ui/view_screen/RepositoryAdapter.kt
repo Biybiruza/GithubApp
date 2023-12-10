@@ -58,7 +58,7 @@ class RepositoryAdapter : RecyclerView.Adapter<RepositoryAdapter.ItemHolderRepos
             }
 
             itemView.setOnClickListener {
-                onClick.invoke(model.svn_url)
+                onClick.invoke(model.html_url)
             }
 
         }
