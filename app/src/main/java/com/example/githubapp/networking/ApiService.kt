@@ -1,5 +1,6 @@
 package com.example.githubapp.networking
 
+import com.example.githubapp.networking.data.Owner
 import com.example.githubapp.networking.data.ResponseData
 import com.example.githubapp.networking.data.UsersInfo
 import retrofit2.Call
@@ -15,5 +16,10 @@ interface ApiService {
     @GET("users/{login}/repos")
     fun getRepositoryList(@Path("login") login: String): Call<List<ResponseData>>
 
+    @GET("search/users?")
+    fun getSearchList(@Query("q") login: String): Call<List<Owner>>
+
+    @GET("users")
+    fun getUsers(): Call<List<Owner>>
 
 }
