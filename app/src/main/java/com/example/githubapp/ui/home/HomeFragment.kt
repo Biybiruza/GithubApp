@@ -9,9 +9,10 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.githubapp.R
 import com.example.githubapp.databinding.FragmentHomeBinding
@@ -22,7 +23,6 @@ import com.example.githubapp.networking.data.UsersInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.log
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -30,19 +30,31 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var adapter: UsersAdapter
     private lateinit var navController: NavController
+    lateinit var login: String
+    private val viewModel by viewModels<HomeViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
+
         sharedPreferences = requireActivity().getSharedPreferences("gitApp", Context.MODE_PRIVATE)
         val service = ApiClient.getRetrofit().create(ApiService::class.java)
         navController = Navigation.findNavController(requireActivity(), R.id.containerView)
         adapter = UsersAdapter()
 
-        val login = sharedPreferences.getString("username", "")
+        login = sharedPreferences.getString("username", "")!!
 
-        loadUserInfo(login, service)
-        loadUsers(service)
+        loadData()
+
+        viewModel.error.observe(requireActivity(), Observer {
+            Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel.apply {
+            userData.observe(requireActivity(), usersObserver)
+            userInfo.observe(requireActivity(), getUserInfoObserver)
+        }
+
         adapter.itemClickListener {
             navController.navigate(
                 R.id.action_mainFragment_to_webViewFragment,
@@ -83,39 +95,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         })
     }
 
-    private fun loadUserInfo(login: String?, service: ApiService) {
-        service.getUsersInfo(login!!).enqueue(object : Callback<UsersInfo> {
-            override fun onResponse(call: Call<UsersInfo>, response: Response<UsersInfo>) {
-                binding.progressBar.visibility = View.GONE
-                if (response.isSuccessful && response.body() != null) {
-                    Glide.with(binding.root).load(response.body()!!.avatar_url)
-                        .into(binding.ivAvatar)
-                    binding.username.text = response.body()!!.login
-                }
-            }
-
-            override fun onFailure(call: Call<UsersInfo>, t: Throwable) {
-
-            }
-
-        })
+    private val usersObserver = Observer<List<Owner>> {
+        binding.progressBar2.visibility = View.GONE
+        adapter.usersList = it
+        binding.rvUsers.adapter = adapter
     }
 
+    private val getUserInfoObserver = Observer<UsersInfo> {
+        binding.progressBar.visibility = View.GONE
+        Glide.with(binding.root).load(it.avatar_url)
+            .into(binding.ivAvatar)
+        binding.username.text = it.login
+    }
 
-    private fun loadUsers(service: ApiService) {
-        service.getUsers().enqueue(object : Callback<List<Owner>> {
-            override fun onResponse(call: Call<List<Owner>>, response: Response<List<Owner>>) {
-                binding.progressBar2.visibility = View.GONE
-                if (response.isSuccessful && response.body() != null) {
-                    adapter.usersList = response.body()!!
-                    binding.rvUsers.adapter = adapter
-                }
-            }
-
-            override fun onFailure(call: Call<List<Owner>>, t: Throwable) {
-
-            }
-
-        })
+    private fun loadData() {
+        viewModel.getUser()
+        viewModel.loadUserInfo(login)
     }
 }

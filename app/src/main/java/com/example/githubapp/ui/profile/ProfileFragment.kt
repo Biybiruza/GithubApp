@@ -8,12 +8,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.githubapp.R
 import com.example.githubapp.databinding.FragmentProfileBinding
 import com.example.githubapp.networking.ApiClient
 import com.example.githubapp.networking.ApiService
 import com.example.githubapp.networking.data.UsersInfo
+import com.example.githubapp.ui.home.HomeViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,47 +25,44 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private lateinit var binding: FragmentProfileBinding
     private lateinit var sharedPreferences: SharedPreferences
+    private val viewModel by viewModels<HomeViewModel>()
+    var login = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProfileBinding.bind(view)
         sharedPreferences = requireActivity().getSharedPreferences("gitApp",Context.MODE_PRIVATE)
-        val login = sharedPreferences.getString("username","")
-        val apiService = ApiClient.getRetrofit().create(ApiService::class.java)
+        login = sharedPreferences.getString("username","").toString()
 
-        loadUserInfo(login, apiService)
+        loadData()
+
+        viewModel.apply {
+            userInfo.observe(requireActivity(),getUserObserver)
+        }
     }
 
-    private fun loadUserInfo(login: String?, apiService: ApiService) {
-        apiService.getUsersInfo(login!!).enqueue(object : Callback<UsersInfo> {
-            override fun onResponse(call: Call<UsersInfo>, response: Response<UsersInfo>) {
-                binding.progressBar.visibility = View.GONE
-                if (response.isSuccessful && response.body() != null){
-                    Glide.with(binding.root).load(response.body()!!.avatar_url).into(binding.ivAvatar)
-                    binding.tvLogin.text = response.body()!!.login
-                    binding.tvFollowersCount.text = response.body()!!.followers.toString()
-                    binding.tvFollowingCount.text = response.body()!!.following.toString()
-                    binding.tvRepositoriesCount.text = response.body()!!.public_repos.toString()
-                    if (response.body()!!.name != null){
-                        binding.tvEmail.text = response.body()!!.name
-                    } else {binding.tvEmail.text = ""}
-                    if (response.body()!!.bio != null){
-                        binding.tvBio.text = response.body()!!.bio
-                    } else {binding.tvBio.text = ""}
-                    if (response.body()!!.location != null){
-                        binding.tvLocation.text = response.body()!!.location
-                    } else {binding.tvLocation.text = ""}
-                    if (response.body()!!.company !=null){
-                        binding.tvCompany.text = response.body()!!.company.toString()
-                    } else {binding.tvCompany.text = ""}
+    private val getUserObserver = Observer<UsersInfo>{
+        binding.progressBar.visibility = View.GONE
+        Glide.with(binding.root).load(it.avatar_url).into(binding.ivAvatar)
+        binding.tvLogin.text = it.login
+        binding.tvFollowersCount.text = it.followers.toString()
+        binding.tvFollowingCount.text = it.following.toString()
+        binding.tvRepositoriesCount.text = it.public_repos.toString()
+        if (it.name != null){
+            binding.tvEmail.text = it.name
+        } else {binding.tvEmail.text = ""}
+        if (it.bio != null){
+            binding.tvBio.text = it.bio
+        } else {binding.tvBio.text = ""}
+        if (it.location != null){
+            binding.tvLocation.text = it.location
+        } else {binding.tvLocation.text = ""}
+        if (it.company !=null){
+            binding.tvCompany.text = it.company.toString()
+        } else {binding.tvCompany.text = ""}
+    }
 
-                }
-            }
-
-            override fun onFailure(call: Call<UsersInfo>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-
-        })
+    private fun loadData(){
+        viewModel.loadUserInfo(login)
     }
 }

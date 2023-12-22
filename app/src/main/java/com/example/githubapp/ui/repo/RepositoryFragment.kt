@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -27,43 +29,37 @@ class RepositoryFragment : Fragment(R.layout.fragment_repository) {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var adapter: RepositoryAdapter
     private lateinit var navController: NavController
+    private val viewModel by viewModels<RepositoryViewModel>()
+    var login = ""
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRepositoryBinding.bind(view)
-        sharedPreferences = requireActivity().getSharedPreferences("gitApp",Context.MODE_PRIVATE)
-
-        navController = Navigation.findNavController(requireActivity(),R.id.containerView)
-
+        sharedPreferences = requireActivity().getSharedPreferences("gitApp", Context.MODE_PRIVATE)
+        navController = Navigation.findNavController(requireActivity(), R.id.containerView)
         adapter = RepositoryAdapter()
 
-        val login = sharedPreferences.getString("username","")
-        val apiService = ApiClient.getRetrofit().create(ApiService::class.java)
+        login = sharedPreferences.getString("username", "").toString()
 
-        loadRepositories(login,apiService)
+        loadData()
+
+        viewModel.apply {
+            repositoryObserver.observe(requireActivity(),repositoriesObserver)
+        }
     }
 
-    private fun loadRepositories(login: String?, apiService: ApiService) {
-        apiService.getRepositoryList(login!!).enqueue(object : Callback<List<ResponseData>>{
-            override fun onResponse(
-                call: Call<List<ResponseData>>,
-                response: Response<List<ResponseData>>
-            ) {
-                binding.progressBar.visibility = View.GONE
-                if (response.isSuccessful && response.body() != null){
-                    adapter.list = response.body()!!
-                    binding.rvRepository.adapter = adapter
-                    adapter.itemClickListener {
-                        val bundle = bundleOf("url" to it)
-                        navController.navigate(R.id.action_mainFragment_to_webViewFragment, bundle)
-                    }
-                }
-            }
+    private fun loadData() {
+        viewModel.getRepository(login)
+    }
 
-            override fun onFailure(call: Call<List<ResponseData>>, t: Throwable) {
-
-            }
-
-        })
+    private val repositoriesObserver = Observer<List<ResponseData>> {
+        binding.progressBar.visibility = View.GONE
+        adapter.list = it
+        binding.rvRepository.adapter = adapter
+        adapter.itemClickListener {url ->
+            val bundle = bundleOf("url" to url)
+            navController.navigate(R.id.action_mainFragment_to_webViewFragment, bundle)
+        }
     }
 }
